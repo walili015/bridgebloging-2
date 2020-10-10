@@ -114,6 +114,12 @@
     height: 100%;
     background: url(../../assets/images/ajax-loader.gif) center center no-repeat; }
 
+.theiaPostSlider_dropdown {
+  text-align: center; }
+  .theiaPostSlider_dropdown select {
+    padding: 6px 8px;
+    font-size: 16px; }
+
 .theiaPostSlider_slides {
   position: relative;
   clear: both;

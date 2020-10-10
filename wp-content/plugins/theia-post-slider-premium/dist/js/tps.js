@@ -183,6 +183,14 @@ tps.createSlideshow = function (options) {
                 });
         }
 
+        // Set up navigation dropdowns.
+        me.navigationDropdowns = $('.theiaPostSlider_dropdown select');
+        me.navigationDropdowns.each(function () {
+            $(this).on('change', function () {
+                me.setSlide(parseInt(this.value) - 1);
+            });
+        });
+
         // Skip loading the slide if we're not going to display another one anyway.
         if (me.numberOfSlides == 1 || (me.options.refreshAds && me.options.adRefreshingMechanism == 'page' && me.options.refreshAdsEveryNSlides <= 1)) {
             me.currentSlide = me.options.defaultSlide;
@@ -443,6 +451,10 @@ tps.createSlideshow = function (options) {
             for (i = 0; i < me.navEl.length; i++) {
                 scrollTop = Math.min(scrollTop, me.navEl[i].container.offset().top);
             }
+            for (i = 0; i < me.navigationDropdowns.length; i++) {
+                // Also consider navigation dropdowns.
+                scrollTop = Math.min(scrollTop, $(me.navigationDropdowns[i]).offset().top);
+            }
             scrollTop += me.options.scrollTopOffset;
             scrollTop = Math.max(0, scrollTop);
             if ($(window).scrollTop() > scrollTop) {
@@ -607,6 +619,11 @@ tps.createSlideshow = function (options) {
         me.currentlyDisplayedSlide = me.currentSlide;
 
         me.createSlideContentFromSource(me.slides[me.currentSlide]);
+
+        // Change dropdown navigations.
+        me.navigationDropdowns.each(function () {
+            this.value = me.currentSlide + 1;
+        });
 
         // Change the slide while applying a certain effect/animation.
         var animationsQueue = tps.transitions[me.options.transitionEffect](me, previousIndex, me.currentlyDisplayedSlide);
