@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2020, Theia Post Slider, WeCodePixels, https://wecodepixels.com
+ * Copyright 2012-2019, Theia Post Slider, WeCodePixels, https://wecodepixels.com
  */
 var tps = tps || {};
 tps.transitions = tps.transitions || {};
